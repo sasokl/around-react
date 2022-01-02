@@ -1,41 +1,31 @@
 import PopupWithForm from "./PopupWithForm";
+import Input from "./Input";
 
-function AddCardPopup({isOpen, onCloseButtonClick, onSubmit}) {
+function AddCardPopup({isOpen, onClose, onSubmit}) {
     return (
         <PopupWithForm
             popupType="add-card"
             popupTitle="New place"
             isOpen={isOpen}
-            onCloseButtonClick={onCloseButtonClick}
+            onClose={onClose}
             onSubmit={onSubmit}
             submitButtonText="Create">
-            <label className="popup__label">
-                <input
-                    type="text"
-                    name="card-title"
-                    id="card-title-input"
-                    className="popup__input"
-                    value=""
-                    minLength="1"
-                    maxLength="30"
-                    required
-                    placeholder="Title"
-                />
-                <span className="popup__input-error card-title-input-error"/>
-            </label>
-
-            <label className="popup__label">
-                <input
-                    type="url"
-                    name="card-image-link"
-                    id="card-image-link-input"
-                    value=""
-                    className="popup__input"
-                    required
-                    placeholder="Image link"
-                />
-                <span className="popup__input-error card-image-link-input-error"/>
-            </label>
+            <Input
+                type="text"
+                name="card-title"
+                value=""
+                handleChange={()=>{}}
+                placeholder="Title"
+                minLength="1"
+                maxLength="30"
+                isRequired={true}/>
+            <Input
+                type="url"
+                name="card-image-link"
+                value=""
+                handleChange={()=>{}}
+                placeholder="Image link"
+                isRequired={true}/>/>
         </PopupWithForm>
     );
 }

@@ -1,15 +1,15 @@
 import Popup from "./Popup";
 
-function ImagePopup({isOpen, onCloseButtonClick, selectedCard}) {
+function ImagePopup({isOpen, onClose, selectedCard}) {
     return (
         <Popup
             popupType="image-preview"
             containerType="image-preview"
             isOpen={isOpen}
-            onCloseButtonClick={onCloseButtonClick}>
+            onClose={onClose}>
             <figure className="popup__figure">
-                <img src={selectedCard.imgUrl} alt="default" className="popup__figure-image"/>
-                <figcaption className="popup__figure-caption">{selectedCard.title}</figcaption>
+                <img src={selectedCard.link} alt={selectedCard.name} className="popup__figure-image"/>
+                <figcaption className="popup__figure-caption">{selectedCard.name}</figcaption>
             </figure>
         </Popup>
     );

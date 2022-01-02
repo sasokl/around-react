@@ -65,6 +65,7 @@ function Main({onEditAvatarClick, onEditProfileClick, onAddCardClick, onCardClic
                 {cards.reverse().map(cardItem => {
                     return (
                         <Card
+                            key={cardItem['_id']}
                             title={cardItem['name']}
                             imgUrl={cardItem['link']}
                             likesCount={cardItem['likes'].length}

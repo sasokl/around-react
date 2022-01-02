@@ -1,12 +1,12 @@
 import PopupWithForm from "./PopupWithForm";
 
-function DeleteCardPopup({isOpen, onCloseButtonClick, onSubmit}) {
+function DeleteCardPopup({isOpen, onClose, onSubmit}) {
     return (
         <PopupWithForm
             popupType="delete-card"
             popupTitle="Are you sure?"
             isOpen={isOpen}
-            onCloseButtonClick={onCloseButtonClick}
+            onClose={onClose}
             onSubmit={onSubmit}
             submitButtonText="Yes"/>
     );

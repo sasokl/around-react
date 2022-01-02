@@ -16,7 +16,7 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [isImagePreviewPopupOpen, setIsImagePreviewPopupOpen] = useState(false);
 
-  const [selectedCard , setSelectedCard ] = useState('');
+  const [selectedCard , setSelectedCard ] = useState({name: '', link: ''});
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -41,7 +41,7 @@ function App() {
     setIsAddCardPopupOpen(false);
     setIsDeleteCardPopupOpen(false);
 
-    setSelectedCard('');
+    setSelectedCard({name: '', link: ''});
     setIsImagePreviewPopupOpen(false);
   }
 
@@ -61,23 +61,23 @@ function App() {
       <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onSubmit={() => console.log("profile submit")}
-          onCloseButtonClick={closeAllPopups}/>
+          onClose={closeAllPopups}/>
       <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onSubmit={() => console.log("avatar submit")}
-          onCloseButtonClick={closeAllPopups}/>
+          onClose={closeAllPopups}/>
       <AddCardPopup
           isOpen={isAddCardPopupOpen}
           onSubmit={() => console.log("add-card submit")}
-          onCloseButtonClick={closeAllPopups}/>
+          onClose={closeAllPopups}/>
       <DeleteCardPopup
           isOpen={isDeleteCardPopupOpen}
           onSubmit={() => console.log("delete-card submit")}
-          onCloseButtonClick={closeAllPopups}/>
+          onClose={closeAllPopups}/>
       <ImagePopup
           isOpen={isImagePreviewPopupOpen}
           selectedCard={selectedCard}
-          onCloseButtonClick={closeAllPopups}/>
+          onClose={closeAllPopups}/>
     </div>
   );
 }

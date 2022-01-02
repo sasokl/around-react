@@ -6,10 +6,10 @@ function Card({title, imgUrl, likesCount, onCardClick}) {
                 src={imgUrl}
                 onClick={()=> {
                     onCardClick({
-                        title:title,
-                        imgUrl: imgUrl});
+                        name:title,
+                        link: imgUrl});
                 }}
-                alt="default"
+                alt={title}
                 className="card__image"/>
                 <div className="card__content">
                     <h2 className="card__title">{title}</h2>
