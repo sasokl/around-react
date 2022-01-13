@@ -1,22 +1,39 @@
 import PopupWithForm from "./PopupWithForm";
-import Input from "./Input";
+import {useRef, useState} from "react";
+import InputRef from "./InputRef";
 
-function EditAvatarPopup({isOpen, onClose, onSubmit}) {
+function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
+  const urlRef = useRef();
+
+  const submitButtonDefaultText = 'Save';
+  const submittingText = 'Saving...';
+
+  const [submitButtonText, setSubmitButtonText] = useState(submitButtonDefaultText);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSubmitButtonText(submittingText);
+    onUpdateAvatar(urlRef.current['value'])
+      .then(() => {
+        onClose();
+        setSubmitButtonText(submitButtonDefaultText)
+      });
+  }
     return (
         <PopupWithForm
             popupType="avatar"
             popupTitle="Change profile picture"
             isOpen={isOpen}
             onClose={onClose}
-            onSubmit={onSubmit}
-            submitButtonText="Save">
-            <Input
+            onSubmit={handleSubmit}
+            submitButtonText={submitButtonText}>
+            <InputRef
                 type="url"
                 name="avatar-image-link"
-                value=""
-                handleChange={()=>{}}
+                defaultValue=""
                 placeholder="Image link"
-                isRequired={true}/>
+                isRequired={true}
+                ref={urlRef}/>
         </PopupWithForm>
     );
 }

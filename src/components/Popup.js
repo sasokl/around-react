@@ -20,7 +20,7 @@ function Popup({popupType, containerType, isOpen, onClose, children}) {
     }
     return (
         <div
-            className={`popup popup_type_${popupType} ${isOpen && `popup_open`}`}
+            className={`popup popup_type_${popupType}${isOpen ? ` popup_open` : ''}`}
             onClick={handleOverlay}
         >
             <div className={`popup__container popup__container_type_${containerType}`}>

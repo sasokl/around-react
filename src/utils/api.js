@@ -115,6 +115,21 @@ class Api {
         })
             .then(this._checkRes);
     }
+
+    /**
+     * Changes the like status of the card by card id depends on 'isLiked' parameter.
+     * @param cardID card id
+     * @param isLiked boolean type parameter of card like status. true if card already liked, otherwise false.
+     * @returns {Promise<never>}
+     */
+    changeLikeCardStatus(cardID, isLiked) {
+        return isLiked ? this.unlikeCard(cardID) : this.likeCard(cardID);
+    }
+
+    /**
+     * logs the error from parameter to console
+     * @param err
+     */
 }
 
 const api = new Api({

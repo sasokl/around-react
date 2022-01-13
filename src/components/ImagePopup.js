@@ -8,8 +8,8 @@ function ImagePopup({isOpen, onClose, selectedCard}) {
             isOpen={isOpen}
             onClose={onClose}>
             <figure className="popup__figure">
-                <img src={selectedCard.link} alt={selectedCard.name} className="popup__figure-image"/>
-                <figcaption className="popup__figure-caption">{selectedCard.name}</figcaption>
+                <img src={selectedCard['link']} alt={selectedCard['name']} className="popup__figure-image"/>
+                <figcaption className="popup__figure-caption">{selectedCard['name']}</figcaption>
             </figure>
         </Popup>
     );
