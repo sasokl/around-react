@@ -33,42 +33,46 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
       .then(() => {
         onClose();
         setSubmitButtonText(submitButtonDefaultText)
+      })
+      // ***
+      .catch((err) => {
+        console.log(err)
       });
   }
 
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
-    return (
-        <PopupWithForm
-            popupType="profile"
-            popupTitle="Edit profile"
-            isOpen={isOpen}
-            onClose={onClose}
-            onSubmit={handleSubmit}
-            submitButtonText={submitButtonText}>
-            <Input
-                type="text"
-                name="name"
-                value={name}
-                handleChange={handleNameChange}
-                placeholder="Name"
-                minLength="2"
-                maxLength="40"
-                isRequired={true}/>
-            <Input
-                type="text"
-                name="about"
-                value={description}
-                handleChange={handleDescriptionChange}
-                placeholder="About me"
-                minLength="2"
-                maxLength="200"
-                isRequired={true}/>
-        </PopupWithForm>
-    );
+  return (
+    <PopupWithForm
+      popupType="profile"
+      popupTitle="Edit profile"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      submitButtonText={submitButtonText}>
+      <Input
+        type="text"
+        name="name"
+        value={name}
+        handleChange={handleNameChange}
+        placeholder="Name"
+        minLength="2"
+        maxLength="40"
+        isRequired={true}/>
+      <Input
+        type="text"
+        name="about"
+        value={description}
+        handleChange={handleDescriptionChange}
+        placeholder="About me"
+        minLength="2"
+        maxLength="200"
+        isRequired={true}/>
+    </PopupWithForm>
+  );
 }
 
 export default EditProfilePopup;

@@ -1,6 +1,14 @@
 import {forwardRef} from "react";
 
-const InputRef = forwardRef(({type ,name, defaultValue, placeholder, minLength=0, maxLength=1024, isRequired }, ref) => {
+const InputRef = forwardRef(({
+                               type,
+                               name,
+                               defaultValue,
+                               placeholder,
+                               minLength = 0,
+                               maxLength = 1024,
+                               isRequired
+                             }, ref) => {
   return (
     <label className="popup__label">
       <input

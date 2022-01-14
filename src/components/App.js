@@ -22,6 +22,7 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
+  const [cardToDelete, setCardToDelete] = useState('');
 
   function logError(err) {
     console.log(err);
@@ -58,6 +59,11 @@ function App() {
     setIsImagePreviewPopupOpen(true);
   }
 
+  function handleCardDeleteClick(cardID) {
+    setCardToDelete(cardID);
+    setIsDeleteCardPopupOpen(true);
+  }
+
   function handleCardLike(card) {
     const isLiked = card['likes'].some(i => i['_id'] === currentUser['_id']);
 
@@ -68,19 +74,17 @@ function App() {
       .catch(logError);
   }
 
-  function handleCardDelete(card) {
-    api.deleteCard(card['_id'])
-      .then(() => {
-        setCards((state) => state.filter((c) => c['_id'] !== card['_id']));
-      })
-      .catch(logError)
-  }
-
   const handleUpdateUser = (user) => {
     return api.setUser(user.name, user.about)
       .then(res => {
         setCurrentUser(res);
       });
+    // ***
+    /* Since the result of this function is used only in the 'EditProfilePopup' component, I don't know exactly where
+     it is better to put the catch - here, or in the component itself at the end. At the moment, I assume that it is
+     more logical to put the catch at the end (in the component). If I'm wrong, please point it out to me in the
+     'NEEDS IMPROVEMENT' message.
+    */
   }
 
   const handleUpdateAvatar = (avatar) => {
@@ -88,6 +92,9 @@ function App() {
       .then(res => {
         setCurrentUser(res);
       });
+    // ***
+    /* Same here. ('EditAvatarPopup')
+    */
   }
 
   const handleAddPlace = (card) => {
@@ -95,6 +102,19 @@ function App() {
       .then(newCard => {
         setCards([newCard, ...cards]);
       });
+    // ***
+    /* Same here. ('EAddPlacePopup')
+    */
+  }
+
+  function handleCardDelete(cardID) {
+    return api.deleteCard(cardID)
+      .then(() => {
+        setCards((state) => state.filter((c) => c['_id'] !== cardID));
+      });
+    // ***
+    /* Same here. ('DeleteCardPopup')
+    */
   }
 
 
@@ -121,7 +141,7 @@ function App() {
             onAddCardClick={handleAddCardClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}/>
+            onCardDelete={handleCardDeleteClick}/>
           <Footer/>
         </div>
         <EditProfilePopup
@@ -138,7 +158,8 @@ function App() {
           onClose={closeAllPopups}/>
         <DeleteCardPopup
           isOpen={isDeleteCardPopupOpen}
-          onSubmit={() => console.log("delete-card submit")}
+          cardToDelete={cardToDelete}
+          onDeleteCard={handleCardDelete}
           onClose={closeAllPopups}/>
         <ImagePopup
           isOpen={isImagePreviewPopupOpen}

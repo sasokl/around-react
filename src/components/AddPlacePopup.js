@@ -1,6 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function AddPlacePopup({isOpen, onClose, onAddPlace}) {
 
@@ -29,35 +29,45 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
       .then(() => {
         onClose();
         setSubmitButtonText(submitButtonDefaultText)
+      })
+      // ***
+      .catch((err) => {
+        console.log(err)
       });
+
   }
 
-    return (
-        <PopupWithForm
-            popupType="add-card"
-            popupTitle="New place"
-            isOpen={isOpen}
-            onClose={onClose}
-            onSubmit={handleSubmit}
-            submitButtonText={submitButtonText}>
-            <Input
-                type="text"
-                name="card-title"
-                value={name}
-                handleChange={handleNameChange}
-                placeholder="Title"
-                minLength="1"
-                maxLength="30"
-                isRequired={true}/>
-            <Input
-                type="url"
-                name="card-image-link"
-                value={link}
-                handleChange={handleLinkChange}
-                placeholder="Image link"
-                isRequired={true}/>
-        </PopupWithForm>
-    );
+  useEffect(() => {
+    setName("");
+    setLink("");
+  }, [isOpen]);
+
+  return (
+    <PopupWithForm
+      popupType="add-card"
+      popupTitle="New place"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      submitButtonText={submitButtonText}>
+      <Input
+        type="text"
+        name="card-title"
+        value={name}
+        handleChange={handleNameChange}
+        placeholder="Title"
+        minLength="1"
+        maxLength="30"
+        isRequired={true}/>
+      <Input
+        type="url"
+        name="card-image-link"
+        value={link}
+        handleChange={handleLinkChange}
+        placeholder="Image link"
+        isRequired={true}/>
+    </PopupWithForm>
+  );
 }
 
 export default AddPlacePopup;
